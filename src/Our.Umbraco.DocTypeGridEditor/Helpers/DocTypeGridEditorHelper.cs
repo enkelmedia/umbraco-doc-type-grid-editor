@@ -66,7 +66,15 @@ namespace Our.Umbraco.DocTypeGridEditor.Helpers
 
                 if (propEditor.Alias == "Umbraco.Tags")
                 {
-                    newValue = JsonConvert.SerializeObject(newValue);
+                    if (newValue == null)
+                    {
+                        newValue = "[]"; //Empty-json array
+                    }
+                    else
+                    {
+                        newValue = JsonConvert.SerializeObject(newValue);
+                    }
+
                 }
 
                 /* Now that we have the DB stored value, we actually need to then convert it into its
