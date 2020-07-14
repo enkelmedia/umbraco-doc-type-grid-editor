@@ -38,10 +38,9 @@ namespace Our.Umbraco.DocTypeGridEditor.Composing
 
         private void ContentServiceOnPublished(IContentService sender, ContentPublishedEventArgs e)
         {
-            foreach (var content in e.PublishedEntities)
-            {
-                _runtimeCache.ClearByKey($"Our.Umbraco.DocTypeGridEditor.Helpers.DocTypeGridEditorHelper.ConvertValueToContent_Page_{content.Id}");
-            }
+            // Empty the whole cache, otherwise it seems like referenced values will not be updated.
+            // This will remove all entries that start with this string.
+            _runtimeCache.ClearByKey($"Our.Umbraco.DocTypeGridEditor.Helpers.DocTypeGridEditorHelper.ConvertValueToContent_Page_");
         }
 
         public void Terminate()
